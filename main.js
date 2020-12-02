@@ -1,4 +1,6 @@
 let c = document.getElementById("canvas");
+c.width = window.innerWidth
+c.height = window.innerHeight
 let ctx = c.getContext("2d");
 let vRain = [];
 
@@ -25,7 +27,7 @@ class Rain {
     this.y += this.v;
 
     //recreate if droplet hits the ground
-    if (this.y < c.hieght) {
+    if (this.y > c.height) {
       this.x = Math.floor(Math.random() * c.width) + 5;
       this.y = Math.floor(Math.random() * 100) - 100;
       this.l = Math.floor(Math.random() * 30) + 1;
@@ -47,14 +49,11 @@ function setup() {
 
   for (var i = 0; i < 60; i++) {
     vRain[i] = new Rain(
-      this.x = Math.floor(Math.random() * c.width) + 5,
-      this.y = Math.floor(Math.random() * 100) - 100,
-      this.l = Math.floor(Math.random() * 30) + 1,
-      this.v = Math.floor(Math.random() * 12) + 4,
+      Math.floor(Math.random() * c.width) + 5,
+      Math.floor(Math.random() * 100) - 100,
+      Math.floor(Math.random() * 30) + 1,
+      Math.floor(Math.random() * 12) + 4,
     );
   }
-  setInterval(function () {
-    setup();
-    loop();
-  }, 10);
+  setInterval(loop, 10);
 }
